@@ -1,7 +1,7 @@
 var net = require('net');
 
 var HOST = '127.0.0.1';
-var PORT = 6969;
+var PORT = 2424;
 var games = {};
 var boards = {};
 
