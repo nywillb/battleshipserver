@@ -67,25 +67,12 @@ net.createServer(function (sock){
                     games[currentgamecode]["player" + playernumber].board[parseInt(res[i])][parseInt(res[i + 1])] = "s";
                 }
                 // console.log(games[currentgamecode]["player" + playernumber].board);
-                if (playernumber == 1) {
-                    if (games[currentgamecode].player2.board == null) {
-                        games[currentgamecode].player2.socket.write("PLAYERREADY\n");
-                        games[currentgamecode].player1.socket.write("PLAYERREADY\n");
-                    } else {
-                        games[currentgamecode].player2.socket.write("MOVEFIRST no\n");
-                        games[currentgamecode].player1.socket.write("MOVEFIRST yes\n");
-                    }
-                } else {
-                    if (games[currentgamecode].player1.board == null) {
-                        games[currentgamecode].player1.socket.write("PLAYERREADY\n");
-                        games[currentgamecode].player2.socket.write("PLAYERREADY\n");
-                    } else {
-                        games[currentgamecode].player2.socket.write("MOVEFIRST no\n");
-                        games[currentgamecode].player1.socket.write("MOVEFIRST yes\n");
-                    }
+                if (games[currentgamecode].player2.board != null && games[currentgamecode.player1.board != null]) {
+                    games[currentgamecode].player1.socket.write("MOVEFIRST yes\n");
+                    games[currentgamecode].player2.socket.write("MOVEFIRST no\n");
                 }
             } else if (msg.includes("MOVE")) {
-                res = msg.split(" ")
+                res = msg.split(" ");
                 if (res[1] == "surrender") {
                     sock.write("MOVE surrendered")
                     if (playernumber === 1) {
@@ -96,6 +83,8 @@ net.createServer(function (sock){
                     delete games[currentgamecode];
                 } else {
                     if (playernumber === 1) {
+                        console.log(res);
+                        console.log(msg);
                         if (games[currentgamecode].player2.board[res[1]][res[2]] === 's') {
                             games[currentgamecode].player1.socket.write("MOVE hit" + (res[1]) + " " + res[2]+"\n");
                             games[currentgamecode].player2.socket.write("MOVE hit" + (res[1]) + " " + res[2]+"\n");
