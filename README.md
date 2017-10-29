@@ -35,7 +35,7 @@ Examples:
 #### :arrow_down: Join
 ```JOIN [success|fail]```
 
-Says if game was successfully joned.
+Says if game was successfully joned to the client who attempted to join the game.
 
 **Examples:**
 - `JOIN success`
@@ -48,16 +48,6 @@ Says if game was successfully joned.
 Sends your player's boards
 *Examples:*
 - `SENDBOARD 1 2 1 4 2 5 3 1`
-
-#### :arrow_down: Player Ready
-
-```PLAYERREADY```
-
-Tells you when the first player has finished submitting their board.
-
-**Examples**
-- `PLAYERREADY`
-
 
 #### :arrow_down: Move First
 ```MOVEFIRST <yes|no>```
@@ -104,19 +94,18 @@ Tells you if you won or lost.
 
 | Speaker    | Message                                               |
 |------------|-------------------------------------------------------|
-| Client 1   | GETGAMECODE                                           |
-| Server     | GAMECODE 123456                                       |
-| Client 2   | JOIN 123456                                           |
-| Server     | JOIN success                                          |
-| Client 1   | SENDBOARD 1 5 2 3 4 3 1 2                             |
-| Server     | PLAYERREADY                                           |
-| Client 2   | SENDBOARD 1 2 1 4 2 5 3 1                             |
-| Server(C1) | MOVEFIRST yes                                         |
-| Server(C2) | MOVEFIRST no                                          |
-| Client 1   | MOVE 1 2                                              |
-| Server     | MOVE hit 1 2                                          |
-| Client 2   | MOVE 2 2                                              |
-| Server     | MOVE miss 2 2                                         |
+| Client 1   | `GETGAMECODE`                                         |
+| Server     | `GAMECODE 123456`                                     |
+| Client 2   | `JOIN 123456`                                         |
+| Server(C2) | `JOIN success`                                        |
+| Client 1   | `SENDBOARD 1 5 2 3 4 3 1 2`                           |
+| Client 2   | `SENDBOARD 1 2 1 4 2 5 3 1`                           |
+| Server(C1) | `MOVEFIRST yes`                                       |
+| Server(C2) | `MOVEFIRST no`                                        |
+| Client 1   | `MOVE 1 2`                                            |
+| Server     | `MOVE hit 1 2`                                        |
+| Client 2   | `MOVE 2 2`                                            |
+| Server     | `MOVE miss 2 2`                                       |
 |            | _Continues `MOVE` communications until game is over._ |
-| Server(C1) | GAMEEND win 2                                         |
-| Server(C2) | GAMEEND lose 2                                        |
+| Server(C1) | `GAMEEND win 2`                                       |
+| Server(C2) | `GAMEEND lose 2`                                      |
