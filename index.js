@@ -46,7 +46,7 @@ net.createServer(function (sock){
             if (games[res[1]] != null) { //game exists!
                 games[res[1]].player2.socket = sock;
                 sock.write("JOIN success\n");
-                games[res[1]].player1.socket.write("JOIN success\n");
+                // games[res[1]].player1.socket.write("JOIN success\n");
                 currentgamecode = res[1];
                 playernumber = 2;
             } else {
@@ -67,7 +67,7 @@ net.createServer(function (sock){
                     games[currentgamecode]["player" + playernumber].board[parseInt(res[i])][parseInt(res[i + 1])] = "s";
                 }
                 // console.log(games[currentgamecode]["player" + playernumber].board);
-                if (games[currentgamecode].player2.board != null && games[currentgamecode.player1.board != null]) {
+                if (games[currentgamecode].player2.board != null && games[currentgamecode].player1.board != null){
                     games[currentgamecode].player1.socket.write("MOVEFIRST yes\n");
                     games[currentgamecode].player2.socket.write("MOVEFIRST no\n");
                 }
@@ -86,21 +86,21 @@ net.createServer(function (sock){
                         console.log(res);
                         console.log(msg);
                         if (games[currentgamecode].player2.board[res[1]][res[2]] === 's') {
-                            games[currentgamecode].player1.socket.write("MOVE hit" + (res[1]) + " " + res[2]+"\n");
-                            games[currentgamecode].player2.socket.write("MOVE hit" + (res[1]) + " " + res[2]+"\n");
+                            games[currentgamecode].player1.socket.write("MOVE hit " + (res[1]) + " " + res[2]+"\n");
+                            games[currentgamecode].player2.socket.write("MOVE hit " + (res[1]) + " " + res[2]+"\n");
                             games[currentgamecode].player2.board[res[1]][res[2]] = "x";
                         } else if (games[currentgamecode].player2.board[res[1]][res[2]] === 'x') {
-                            games[currentgamecode].player1.socket.write("MOVE miss" + res[1] + " " + res[2]+"\n");
-                            games[currentgamecode].player2.socket.write("MOVE miss" + res[1] + " " + res[2]+"\n");
+                            games[currentgamecode].player1.socket.write("MOVE miss " + res[1] + " " + res[2]+"\n");
+                            games[currentgamecode].player2.socket.write("MOVE miss " + res[1] + " " + res[2]+"\n");
                         }
                     } else {
                         if (games[currentgamecode].player1.board[res[1]][res[2]] === 's') {
-                            games[currentgamecode].player1.socket.write("MOVE hit" + res[1] + " " + res[2]+"\n");
-                            games[currentgamecode].player2.socket.write("MOVE hit" + res[1] + " " + res[2]+"\n");
+                            games[currentgamecode].player1.socket.write("MOVE hit " + res[1] + " " + res[2]+"\n");
+                            games[currentgamecode].player2.socket.write("MOVE hit " + res[1] + " " + res[2]+"\n");
                             games[currentgamecode].player1.board[res[1]][res[2]] = "x";
                         } else if (games[currentgamecode].player1.board[res[1]][res[2]] === 'x') {
-                            games[currentgamecode].player1.socket.write("MOVE miss" + res[1] + " " + res[2]+"\n");
-                            games[currentgamecode].player2.socket.write("MOVE miss" + res[1] + " " + res[2]+"\n");
+                            games[currentgamecode].player1.socket.write("MOVE miss " + res[1] + " " + res[2]+"\n");
+                            games[currentgamecode].player2.socket.write("MOVE miss " + res[1] + " " + res[2]+"\n");
                         }
                     }
                     var player1hasremaining = null;
