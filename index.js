@@ -1,6 +1,6 @@
 var net = require('net');
 
-var HOST = '127.0.0.1';
+var HOST = '0.0.0.0';
 var PORT = 2424;
 var games = {};
 var boards = {};
@@ -15,13 +15,13 @@ net.createServer(function (sock){
     var playernumber = null;
 
     // We have a connection - a socket object is assigned to the connection automatically
-     console.log('CONNECTED: ' + sock.remoteAddress + ':' + sock.remotePort);
+     //console.log('CONNECTED: ' + sock.remoteAddress + ':' + sock.remotePort);
 
     // Add a 'data' event handler to this instance of socket
     sock.on('data', function (data) {
         
 
-        console.log('DATA ' + sock.remoteAddress + ': ' + data);
+        //console.log('DATA ' + sock.remoteAddress + ': ' + data);
 
         msg = data.toString('utf8').trim()
         if (msg === "GETGAMECODE") {
