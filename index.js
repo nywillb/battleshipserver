@@ -43,7 +43,7 @@ net.createServer(function (sock){
         }
         if (msg.includes("JOIN")) {
             res = msg.split(" ");
-            if (games[res[1]] != null) { //game exists!
+            if (games[res[1]] !== null) { //game exists!
                 games[res[1]].player2.socket = sock;
                 sock.write("JOIN success\n");
                 // games[res[1]].player1.socket.write("JOIN success\n");
@@ -53,7 +53,7 @@ net.createServer(function (sock){
                 sock.write("JOIN fail\n");
             }
         }
-        if (currentgamecode != null) {
+        if (currentgamecode !== null) {
             if (msg.includes("SENDBOARD")) {
                 res = msg.split(" ");
                 games[currentgamecode]["player" + playernumber].board = [
@@ -67,13 +67,13 @@ net.createServer(function (sock){
                     games[currentgamecode]["player" + playernumber].board[parseInt(res[i])][parseInt(res[i + 1])] = "s";
                 }
                 // console.log(games[currentgamecode]["player" + playernumber].board);
-                if (games[currentgamecode].player2.board != null && games[currentgamecode].player1.board != null){
+                if (games[currentgamecode].player2.board !== null && games[currentgamecode].player1.board !== null){
                     games[currentgamecode].player1.socket.write("MOVEFIRST yes\n");
                     games[currentgamecode].player2.socket.write("MOVEFIRST no\n");
                 }
             } else if (msg.includes("MOVE")) {
                 res = msg.split(" ");
-                if (res[1] == "surrender") {
+                if (res[1] === "surrender") {
                     sock.write("MOVE surrendered")
                     if (playernumber === 1) {
                         games[currentgamecode].player2.socket.write("MOVE surrendered\n");
@@ -107,10 +107,10 @@ net.createServer(function (sock){
                     var player2hasremaining = null;
                     for (var i = 0; i < 5; i++) {
                         for (var j = 0; j < 5; j++) {
-                            if (games[currentgamecode].player1.board[i][j] == "s") {
+                            if (games[currentgamecode].player1.board[i][j] === "s") {
                                 player1hasremaining = true;
                             }
-                            if (games[currentgamecode].player2.board[i][j] == "s") {
+                            if (games[currentgamecode].player2.board[i][j] === "s") {
                                 player2hasremaining = true;
                             }
                         }
